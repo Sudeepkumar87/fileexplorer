@@ -24,3 +24,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Ensure proper scrolling behavior on mobile */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Drag and drop styles */
+.draggable {
+  cursor: move;
+}
+
+.draggable:active {
+  cursor: grabbing;
+}
+
+/* Improve search result styling */
+.search-result-item {
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f3f4f6;
+}

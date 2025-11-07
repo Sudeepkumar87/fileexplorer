@@ -1,0 +1,69 @@
+{
+  "name": "root",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Documents",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Projects",
+          "type": "folder",
+          "children": [
+            {
+              "name": "project1.txt",
+              "type": "file"
+            },
+            {
+              "name": "project2.txt",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "name": "Notes",
+          "type": "folder",
+          "children": [
+            {
+              "name": "meeting-notes.txt",
+              "type": "file"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pictures",
+      "type": "folder",
+      "children": [
+        {
+          "name": "vacation",
+          "type": "folder",
+          "children": [
+            {
+              "name": "beach.jpg",
+              "type": "file"
+            },
+            {
+              "name": "mountains.jpg",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "name": "profile.jpg",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "name": "Downloads",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "readme.txt",
+      "type": "file"
+    }
+  ]
+}
