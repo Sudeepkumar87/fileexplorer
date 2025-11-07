@@ -27,14 +27,14 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    // Show custom delete modal instead of browser alert
+  
     setShowDeleteModal(true);
   };
 
   const handleCreate = (e) => {
     e.stopPropagation();
     
-    // Validation
+
     if (!createName.trim()) {
       toast.error("Please enter a name for the new item");
       return;
@@ -45,9 +45,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
       return;
     }
     
-    // Path to the current node where we want to create the item
-    // For root node, path should be empty array
-    // For other nodes, path should include the full path to that node
+
     const createPath = node.name === "root" ? [] : [...path, node.name];
     
     const result = dispatch(createItem({ 
@@ -64,7 +62,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
   const handleRename = (e) => {
     e.stopPropagation();
     
-    // Validation
+ 
     if (!newName.trim()) {
       toast.error("Please enter a new name");
       return;
@@ -80,7 +78,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
       return;
     }
     
-    // Path to the current node's parent
+
     const result = dispatch(renameItem({ 
       path, 
       oldName: node.name, 
@@ -92,10 +90,10 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
     toast.success(`"${node.name}" renamed to "${newName}" successfully`);
   };
 
-  // Drag and drop handlers
+
   const handleDragStart = (e) => {
     e.stopPropagation();
-    // Only allow dragging of files and folders (not root)
+   
     if (node.name !== "root") {
       e.dataTransfer.setData("text/plain", JSON.stringify({ 
         name: node.name, 
@@ -113,7 +111,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
     e.preventDefault();
     e.stopPropagation();
     
-    // Only allow dropping on folders
+
     if (node.type === "folder") {
       setIsDragOver(true);
       if (onDragOver) onDragOver(e, node, path);
@@ -131,17 +129,17 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
     e.stopPropagation();
     setIsDragOver(false);
     
-    // Only allow dropping on folders
+
     if (node.type === "folder") {
       try {
         const data = JSON.parse(e.dataTransfer.getData("text/plain"));
-        // Don't allow dropping onto self
+
         if (data.name === node.name && JSON.stringify(data.path) === JSON.stringify(path)) {
           toast.error("Cannot move item to itself");
           return;
         }
         
-        // Dispatch move action
+   
         const result = dispatch(moveItem({
           sourcePath: data.path,
           sourceName: data.name,
@@ -189,7 +187,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
                     setShowCreateForm(!showCreateForm);
                     setShowRenameForm(false);
                   }}
-                  className="text-green-500 text-xs px-2 py-1 hover:underline"
+                  className="text-green-500 text-xs px-2 py-1 hover:underline cursor-pointer"
                 >
                   New
                 </button>
@@ -198,7 +196,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
                     e.stopPropagation();
                     setExpanded(true);
                   }}
-                  className="text-blue-500 text-xs px-2 py-1 hover:underline"
+                  className="text-blue-500 text-xs px-2 py-1 hover:underline cursor-pointer"
                 >
                   Expand
                 </button>
@@ -210,13 +208,13 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
                 setShowRenameForm(!showRenameForm);
                 setShowCreateForm(false);
               }}
-              className="text-yellow-500 text-xs px-2 py-1 hover:underline"
+              className="text-yellow-500 text-xs px-2 py-1 hover:underline cursor-pointer"
             >
               Rename
             </button>
             <button
               onClick={handleDelete}
-              className="text-red-500 text-xs px-2 py-1 hover:underline"
+              className="text-red-500 text-xs px-2 py-1 hover:underline cursor-pointer"
             >
               Delete
             </button>
@@ -224,7 +222,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
         )}
       </div>
       
-      {/* Delete Confirmation Modal */}
+  
       <DeleteModal 
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
@@ -232,7 +230,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
         itemPath={path}
       />
       
-      {/* Rename Form */}
+
       {showRenameForm && (
         <div className="ml-0 sm:ml-4 mt-2 mb-2 p-3 bg-white rounded border shadow-sm">
           <div className="flex flex-col sm:flex-row gap-2">
@@ -266,7 +264,7 @@ export default function FileNode({ node, path = [], onDragStart, onDragOver, onD
         </div>
       )}
       
-      {/* Create Form */}
+ 
       {showCreateForm && (
         <div className="ml-0 sm:ml-4 mt-2 mb-2 p-3 bg-white rounded border shadow-sm">
           <div className="flex flex-col sm:flex-row gap-2">

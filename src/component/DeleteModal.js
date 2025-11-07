@@ -7,7 +7,7 @@ export default function DeleteModal({ isOpen, onClose, itemName, itemPath }) {
   const dispatch = useDispatch();
 
   const handleConfirmDelete = () => {
-    // Dispatch the delete action
+
     const pathArray = Array.isArray(itemPath) ? itemPath : 
                      itemPath ? itemPath.split("/").filter(p => p.trim()) : [];
     

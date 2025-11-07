@@ -6,7 +6,7 @@ import FileActions from "./FileActions";
 import ErrorModal from "./ErrorModal";
 import { setStructure, setSearchQuery, performSearch } from "@/redux/fileSlice";
 
-// Import the local data
+
 import initialData from "./dataholder.json";
 
 export default function FileExplorer() {
@@ -17,7 +17,7 @@ export default function FileExplorer() {
   const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
-    // Use the local data instead of fetching
+   
     dispatch(setStructure(initialData));
   }, [dispatch]);
 
@@ -40,7 +40,7 @@ export default function FileExplorer() {
     <div className="flex flex-col bg-gray-100 p-4 rounded-xl shadow w-full">
       <h2 className="text-lg font-bold mb-3">📁 File Explorer</h2>
       
-      {/* Search Bar */}
+  
       <div className="mb-3">
         <input
           type="text"

@@ -7,25 +7,25 @@ import DeleteModal from "./DeleteModal";
 
 export default function FileActions() {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState("create"); // "create", "rename", or "delete"
+  const [activeTab, setActiveTab] = useState("create"); 
 
-  // Create state
+
   const [createPath, setCreatePath] = useState("");
   const [createName, setCreateName] = useState("");
   const [createType, setCreateType] = useState("file");
 
-  // Rename state
+
   const [renamePath, setRenamePath] = useState("");
   const [renameOldName, setRenameOldName] = useState("");
   const [renameNewName, setRenameNewName] = useState("");
 
-  // Delete state
+
   const [deletePath, setDeletePath] = useState("");
   const [deleteName, setDeleteName] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleCreate = () => {
-    // Validation
+  
     if (!createName.trim()) {
       toast.error("Please enter a name for the new item");
       return;
@@ -35,21 +35,19 @@ export default function FileActions() {
       toast.error("File/folder name cannot contain '/' character");
       return;
     }
-    
-    // For root level, path should be empty array
-    // For nested paths, we split by '/' and filter out empty strings
+  
     const pathArray = createPath ? createPath.split("/").filter(p => p.trim()) : [];
     
-    // Dispatch action and let Redux handle the operation
+
     const result = dispatch(createItem({ path: pathArray, name: createName, type: createType }));
     
-    // Clear form
+
     setCreateName("");
     toast.success(`"${createName}" created successfully`);
   };
 
   const handleRename = () => {
-    // Validation
+ 
     if (!renameOldName.trim()) {
       toast.error("Please enter the current name of the item");
       return;
@@ -70,37 +68,37 @@ export default function FileActions() {
       return;
     }
     
-    // For root level, path should be empty array
+
     const pathArray = renamePath ? renamePath.split("/").filter(p => p.trim()) : [];
     
-    // Dispatch action
+ 
     const result = dispatch(renameItem({ path: pathArray, oldName: renameOldName, newName: renameNewName }));
     
-    // Clear form
+
     setRenameOldName("");
     setRenameNewName("");
     toast.success(`"${renameOldName}" renamed to "${renameNewName}" successfully`);
   };
 
   const handleDelete = () => {
-    // Validation
+
     if (!deleteName.trim()) {
       toast.error("Please enter the name of the item to delete");
       return;
     }
     
-    // Show delete modal instead of directly dispatching
+
     setShowDeleteModal(true);
   };
 
   const confirmDelete = () => {
-    // For root level, path should be empty array
+
     const pathArray = deletePath ? deletePath.split("/").filter(p => p.trim()) : [];
     
-    // Dispatch action
+  
     const result = dispatch(deleteItem({ path: pathArray, name: deleteName }));
     
-    // Clear form
+
     setDeleteName("");
     toast.success(`"${deleteName}" deleted successfully`);
     setShowDeleteModal(false);
@@ -110,7 +108,7 @@ export default function FileActions() {
     <div className="flex flex-col gap-3 mb-3 bg-white p-3 rounded-md shadow">
       <h3 className="font-semibold text-sm">⚙️ File Operations</h3>
       
-      {/* Tabs */}
+  
       <div className="flex flex-wrap border-b">
         <button
           className={`py-2 px-4 text-sm font-medium ${activeTab === "create" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
@@ -132,7 +130,7 @@ export default function FileActions() {
         </button>
       </div>
 
-      {/* Create Tab */}
+
       {activeTab === "create" && (
         <div className="flex flex-col gap-2">
           <input
@@ -166,7 +164,7 @@ export default function FileActions() {
         </div>
       )}
 
-      {/* Rename Tab */}
+
       {activeTab === "rename" && (
         <div className="flex flex-col gap-2">
           <input
@@ -198,7 +196,7 @@ export default function FileActions() {
         </div>
       )}
 
-      {/* Delete Tab */}
+
       {activeTab === "delete" && (
         <div className="flex flex-col gap-2">
           <input
@@ -224,7 +222,7 @@ export default function FileActions() {
         </div>
       )}
       
-      {/* Delete Confirmation Modal */}
+  
       <DeleteModal 
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}

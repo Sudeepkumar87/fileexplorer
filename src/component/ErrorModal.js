@@ -11,11 +11,11 @@ export default function ErrorModal() {
   useEffect(() => {
     if (error) {
       toast.error(error);
-      // Clear the error after showing the toast
+
       dispatch(clearError());
     }
   }, [error, dispatch]);
 
-  // This component doesn't render anything directly since we're using Toastify
+
   return null;
 }
